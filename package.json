@@ -1,0 +1,19 @@
+{
+  "name": "pc-shop",
+  "version": "1.0.0",
+  "description": "Online computer shop built with MERN stack.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Pedja1310/pc-shop.git"
+  },
+  "author": "Pedja Stojiljkovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pedja1310/pc-shop/issues"
+  },
+  "homepage": "https://github.com/Pedja1310/pc-shop#readme"
+}
