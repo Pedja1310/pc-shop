@@ -4,26 +4,23 @@ import { Container } from "react-bootstrap";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Auth from "./pages/Auth";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Products from "./pages/Products";
 
 function App() {
   return (
     <>
       <Header />
-      <Switch>
-        <main>
-          <Container>
-            <Route path="/login">
-              <h1>Login</h1>
-            </Route>
-            <Route path="/signup">
-              <h1>Signup</h1>
-            </Route>
-            <Route path="/">
-              <h1>Home</h1>
-            </Route>
-          </Container>
-        </main>
-      </Switch>
+      <Container as="main" className="my-4">
+        <Switch>
+          <Route path="/auth" component={Auth} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/" component={Products} />
+        </Switch>
+      </Container>
       <Footer />
     </>
   );
