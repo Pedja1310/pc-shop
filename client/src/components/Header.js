@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Bag } from "react-bootstrap-icons";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 const Header = () => {

@@ -8,6 +8,7 @@ import Auth from "./pages/Auth";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Products from "./pages/Products";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/auth" component={Auth} />
           <Route path="/cart" component={Cart} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/products/:id" component={ProductPage} />
           <Route path="/" component={Products} />
         </Switch>
       </Container>
