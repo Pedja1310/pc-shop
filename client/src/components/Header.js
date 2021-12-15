@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, Badge } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogoutAction } from "../store/actions/authActions";
 
 const Header = () => {
-  const user = false;
+  const user = useSelector((state) => state.user);
+  const cart = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(userLogoutAction());
+  };
+
   return (
     <Navbar expand="sm" variant="dark" bg="dark">
       <Container>
@@ -12,29 +22,28 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-toggle" />
         <Navbar.Collapse id="basic-navbar-toggle">
           <Nav className="ms-auto">
-            {!user ? (
+            {!user.email ? (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link as={Link} to="/auth">
                   Login
-                </Nav.Link>
-                <Nav.Link as={Link} to="/signup">
-                  Signup
                 </Nav.Link>
               </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/cart">
-                  Cart
+                  Cart{" "}
+                  {cart.length > 0 && (
+                    <Badge bg="dark" text="light">
+                      {cart.length}
+                    </Badge>
+                  )}
                 </Nav.Link>
-                <NavDropdown title="User">
-                  <NavDropdown.Item as={Link} to={"/profile"}>
-                    Profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item as={Link} to={"/"}>
-                    Log Out
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Link as={Link} to={"/profile"}>
+                  Profile
+                </Nav.Link>
+                <Nav.Link as={Link} to={"/"} onClick={handleLogout}>
+                  Logout
+                </Nav.Link>
               </>
             )}
           </Nav>

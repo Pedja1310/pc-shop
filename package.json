@@ -4,7 +4,11 @@
   "description": "Online computer shop built with MERN stack.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
+    "prod": "NODE_ENV=production nodemon server.js",
+    "data:add": "node seed-data/dataSeeder -i",
+    "data:remove": "node seed-data/dataSeeder"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,17 @@
   "bugs": {
     "url": "https://github.com/Pedja1310/pc-shop/issues"
   },
-  "homepage": "https://github.com/Pedja1310/pc-shop#readme"
+  "homepage": "https://github.com/Pedja1310/pc-shop#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-validator": "^6.12.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "morgan": "^1.10.0",
+    "validator": "^13.7.0"
+  }
 }
