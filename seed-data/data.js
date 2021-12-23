@@ -4,8 +4,7 @@ const data = [
     price: "308.94",
     inStock: 8,
     brand: "Intel",
-    category: ["desktop"],
-    type: "cpu",
+    category: "cpu",
     image:
       "https://cdn.pcexpress.co.za/media/catalog/product/i/n/intel_core_i7_-_10th_gen.jpg",
     description:
@@ -16,8 +15,7 @@ const data = [
     price: 82.99,
     inStock: 2,
     brand: "Crucial Ballistix",
-    category: ["desktop"],
-    type: "ram",
+    category: "ram",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTv38h5qxt0-m2uZiHzNag7aXfJfWEU3LGxQ&usqp=CAU",
     description:
@@ -28,8 +26,7 @@ const data = [
     price: 9999.99,
     inStock: 1,
     brand: "Nvidia",
-    category: ["desktop"],
-    type: "gpu",
+    category: "gpu",
     image: "https://i.ebayimg.com/images/g/XtYAAOSwuxJf9GCu/s-l640.jpg",
     description:
       "GeForce RTX 30 Series GPUs deliver the ultimate performance for gamers and creators. They’re powered by Ampere—NVIDIA’s 2nd gen RTX architecture— with new RT Cores, Tensor Cores, and streaming multiprocessors for the most realistic ray-traced graphics and cutting-edge AI features. Experience today’s biggest blockbusters like never before with the visual fidelity of real-time ray tracing and the ultimate performance of AI-powered DLSS. RTX. It’s On. NVIDIA DLSS is groundbreaking AI rendering that boosts frame rates with uncompromised image quality using the dedicated AI processing Tensor Cores on GeForce RTX. This gives you the performance headroom to crank up settings and resolutions for an incredible visual experience. The AI revolution has come to gaming. NVIDIA Reflex delivers the ultimate competitive advantage. The lowest latency. The best responsiveness. Powered by GeForce RTX 30 Series GPUs and NVIDIA G-SYNC monitors. Acquire targets faster, react quicker, and increase aim precision through a revolutionary suite of technologies to measure and optimize system latency for competitive games. Take your creative projects to a new level with GeForce RTX 30 Series GPUs. Delivering AI-acceleration in top creative apps. Backed by the NVIDIA Studio platform of dedicated drivers and exclusive tools. And built to perform in record time. Whether rendering complex 3D scenes, editing 8K video, or livestreaming with the best encoding and image quality, GeForce RTX GPUs give you the performance to create your best.",
@@ -39,8 +36,7 @@ const data = [
     price: 556.04,
     inStock: 4,
     brand: "AMD",
-    category: ["desktop"],
-    type: "cpu",
+    category: "cpu",
     image: "https://www.proshop.dk/Images/915x900/2884173_7a19c0f06695.png",
     description:
       "The AMD Ryzen 9 5900X is a high-end 12-core, hyperthreaded (SMT) Vermeer series desktop processor that can process 24 threads simultaneously. Introduced on October 8, 2020, the Ryzen 9 5900X is the fastest 12-core processor and is specified at 105 watts TDP. The top model, the AMD Ryzen 9 5950X, offers even more power and at the same time offers another 4 cores and 8 threads. The Ryzen 9 5900X clocks with 3.7 GHz base clock and reaches up to 4.8 GHz on one core in turbo mode. However, when all 12 cores are loaded, up to 4.5 GHz is still possible. The performance of the AMD Ryzen 9 5900X is consistently excellent in all applications and significantly better than the AMD Ryzen 9 3900X. AMD has been able to significantly improve its single thread performance in particular and even beats the Intel Core i9-10900K in this discipline. The multi-thread performance could also be improved. In an in-house duel, the AMD Ryzen 9 5900X can even take on an AMD Threadripper 2950X.",
@@ -50,8 +46,7 @@ const data = [
     price: 99.34,
     inStock: 55,
     brand: "Western Digital",
-    category: ["desktop", "laptop"],
-    type: "storage",
+    category: "storage",
     image:
       "https://www.xstra.eu/resize/wd-blue-2_4432512570961.jpg/0/1100/True/western-digital-blue-ssd-1tb-25-quot-7mm-sata-iii-6gb-s-3d-nand-flash-2.jpg",
     description:
@@ -62,8 +57,7 @@ const data = [
     price: 179.0,
     inStock: 11,
     brand: "Intel",
-    category: ["desktop"],
-    type: "cpu",
+    category: "cpu",
     image:
       "https://s.cdnmpro.com/241860914/p/m/8/intel-cpu-core-i5-9600kf-3-7ghz-9mb-lga1151-coffee-lake-14nm-box~1208018.jpg",
     description:
@@ -74,8 +68,7 @@ const data = [
     price: 239.99,
     inStock: 4,
     brand: "AMD",
-    category: ["desktop"],
-    type: "gpu",
+    category: "gpu",
     image:
       "https://c1.neweggimages.com/ProductImage/A4RE_131677404684821182K3qEoqdi69.jpg",
     description:
@@ -86,8 +79,7 @@ const data = [
     price: 329.99,
     inStock: 3,
     brand: "Intel",
-    category: ["desktop"],
-    type: "cpu",
+    category: "cpu",
     image: "https://cdn.alzashop.com/ImgW.ashx?fd=f16&cd=BO533f9b",
     description:
       "Only compatible with their 300-series chipset-based motherboards, the Core i9-9900K 3.6 GHz Eight-Core LGA 1151 Processor from Intel is designed for gaming, creating, and productivity. It has a base clock speed of 3.6 GHz and comes with features such as Intel Optane Memory support, AES-NI encryption, Intel vPro technology, Intel TXT, Intel Device Protection with Boot Guard, Intel VT-d virtualization technology for directed I/O, and Intel Hyper-Threading technology for 16-way multitasking. With Intel Turbo Boost Max 3.0 technology, the maximum turbo frequency this processor can achieve is 5.0 GHz. Additionally, this processor features 8 cores with 16 threads in an LGA 1151 socket, has 16MB of cache memory, and 24 PCIe lanes. Having 8 cores allows the processor to run multiple programs simultaneously without slowing down the system, while the 16 threads allow a basic ordered sequence of instructions to be passed through or processed by a single CPU core. This processor also supports dual-channel DDR4-2666 RAM and utilizes 9th-generation technology.",
@@ -97,8 +89,7 @@ const data = [
     price: 78.99,
     inStock: 16,
     brand: "Vengeance",
-    category: ["desktop"],
-    type: "ram",
+    category: "ram",
     image: "https://m.media-amazon.com/images/I/71EXOwFSf-L._AC_SL1500_.jpg",
     description:
       "Vengeance LPX memory is designed for high performance Overclocking. The heat spreader is made of pure aluminum for faster heat dissipation, and the eight layer PCB helps manage heat and provides superior Overclocking headroom. Each IC is individually screened for performance potential. The DDR4 form factor is optimized for the latest Intel 100 series motherboards and offers higher frequencies, greater bandwidth, and lower power consumption than DDR3 modules. Vengeance LPX DDR4 modules are compatibility tested across 100 Series motherboards for reliably fast performance. There's XMP 2.0 support for trouble free automatic Overclocking. And, they're available in multiple colors to match your motherboard, your components, or just your style.",
@@ -108,8 +99,7 @@ const data = [
     price: 289.99,
     inStock: 13,
     brand: "AMD",
-    type: "cpu",
-    category: ["desktop"],
+    category: "cpu",
     image:
       "https://www.amd.com/system/files/2020-09/616656-amd-ryzen-5-5000-series-PIB-fan-1260x709.png",
     description:
@@ -120,8 +110,7 @@ const data = [
     price: 90.49,
     inStock: 26,
     brand: "Crucial",
-    category: ["desktop"],
-    type: "storage",
+    category: "storage",
     image:
       "https://i.expansys.net/img/b/316123/crucial-mx500-external-hard-drive.jpg",
     description:

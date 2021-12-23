@@ -4,7 +4,9 @@ const CustomError = require("../utils/CustomError");
 const cloudinary = require("cloudinary").v2;
 
 exports.getAllProducts = catchAsync(async (req, res, next) => {
-  const products = await Product.find().select("title image price brand");
+  const products = await Product.find().select(
+    "title image price brand category"
+  );
 
   res.status(200).json({ status: "success", products });
 });
@@ -24,7 +26,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
     upload_preset: "pc-shop",
   });
 
-  // console.log(imageUploadResponse);
+  console.log(imageUploadResponse);
   // const product = await Product.create(req.body);
   res.status(201).json({ status: "success", message: "it works" });
 });

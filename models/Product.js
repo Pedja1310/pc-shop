@@ -12,8 +12,8 @@ const ProductSchema = new mongoose.Schema({
     required: [true, "Product description is required."],
     trim: true,
     maxlength: [
-      1000,
-      "Product name should not be longer than 1000 characters.",
+      2000,
+      "Product description should not be longer than 2000 characters.",
     ],
   },
   brand: {
@@ -30,15 +30,8 @@ const ProductSchema = new mongoose.Schema({
     required: [true, "Product price is required."],
   },
   category: {
-    type: [String],
-    required: [true, "Product category is required."],
-    enum: ["desktop", "laptop", "accessories"],
-  },
-
-  type: {
     type: String,
-    required: [true, "Product type is required."],
-    trim: true,
+    required: [true, "Product category is required."],
   },
   image: {
     type: String,

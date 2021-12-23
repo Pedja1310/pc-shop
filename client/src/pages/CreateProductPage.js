@@ -77,29 +77,6 @@ const CreateProductPage = () => {
           </Form.Group>
         </Row>
         <Row className="mx-auto">
-          <Form.Group as={Col} controlId="category" md={6} className="mt-3">
-            <Form.Label>Product category</Form.Label>
-            <Form.Select
-              defaultValue="desktop"
-              name="category"
-              onChange={handleChange}
-            >
-              <option value="desktop">desktop</option>
-              <option value="laptop">laptop</option>
-              <option value="accessories">accessories</option>
-            </Form.Select>
-          </Form.Group>
-          <Form.Group as={Col} controlId="type" md={6} className="mt-3">
-            <Form.Label>Product type</Form.Label>
-            <Form.Control
-              name="type"
-              type="text"
-              placeholder="Cpu, gpu, headphones..."
-              onChange={handleChange}
-            />
-          </Form.Group>
-        </Row>
-        <Row className="mx-auto">
           <Form.Group as={Col} controlId="price" md={6} className="mt-3">
             <Form.Label>Product price</Form.Label>
             <Form.Control
@@ -110,14 +87,31 @@ const CreateProductPage = () => {
             />
           </Form.Group>
           <Form.Group as={Col} controlId="inStock" md={6} className="mt-3">
-            <Form.Label>Product in stock</Form.Label>
-            <Form.Select
-              defaultValue={true}
+            <Form.Label>Product price</Form.Label>
+            <Form.Control
               name="inStock"
+              type="number"
+              min="0"
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Row>
+        <Row className="mx-auto">
+          <Form.Group as={Col} controlId="category" className="mt-3">
+            <Form.Label>Product category</Form.Label>
+            <Form.Select
+              defaultValue="desktop"
+              name="category"
               onChange={handleChange}
             >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
+              <option value="gpu">GPU</option>
+              <option value="cpu">CPU</option>
+              <option value="storage">Storage</option>
+              <option value="ram">RAM</option>
+              <option value="monitor">Monitor</option>
+              <option value="cooler">Cooler</option>
+              <option value="psu">Power Supply Unit</option>
+              <option value="accessories">Accessories</option>
             </Form.Select>
           </Form.Group>
         </Row>
