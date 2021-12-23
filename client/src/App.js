@@ -11,6 +11,8 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Products from "./pages/Products";
 import ProductPage from "./pages/ProductPage";
+import CreateProductPage from "./pages/CreateProductPage";
+
 import store from "./store";
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
             <Route path="/auth" component={Auth} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
+            <Route path="/create-product" component={CreateProductPage} />
             <Route path="/products/:id" component={ProductPage} />
             <Route path="/" component={Products} />
           </Switch>
