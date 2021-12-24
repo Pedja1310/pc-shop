@@ -2,7 +2,7 @@ const Product = require("../models/Product");
 const data = require("./data");
 const connectDB = require("../config/db");
 
-require("dotenv").config({ path: `${__dirname}/../config.env` });
+require("dotenv").config({ path: `${__dirname}/../.env` });
 
 connectDB();
 
