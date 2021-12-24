@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
       <Card.Header>{product.brand}</Card.Header>
       <Card.Img
         variant="top"
-        src={product.image}
+        src={product.image.imageUrl}
         style={{ width: "100%", height: "30vh", objectFit: "cover" }}
       />
       <Card.Body className="d-flex flex-column">

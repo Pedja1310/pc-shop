@@ -31,7 +31,10 @@ const ProductDetails = () => {
         <>
           <Row>
             <Col lg="4">
-              <Image src={product.image} style={{ maxWidth: "100%" }} />
+              <Image
+                src={product.image.imageUrl}
+                style={{ maxWidth: "100%" }}
+              />
             </Col>
             <Col lg="8" className="px-lg-5 d-flex flex-column">
               <h4>{product.title}</h4>
