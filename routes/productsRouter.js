@@ -3,9 +3,9 @@ const {
   getAllProducts,
   getSingleProduct,
   createProduct,
-  uploadProductImage,
   updateProduct,
   deleteProduct,
+  handleProductImage,
 } = require("../controllers/productsController");
 
 const {
@@ -21,8 +21,8 @@ productsRouter
   .post(authentication, authorization("admin"), createProduct);
 
 productsRouter
-  .route("/uploadImage")
-  .post(authentication, authorization("admin"), uploadProductImage);
+  .route("/handleProductImage")
+  .post(authentication, authorization("admin"), handleProductImage);
 
 productsRouter
   .route("/:id")
