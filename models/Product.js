@@ -34,10 +34,16 @@ const ProductSchema = new mongoose.Schema({
     required: [true, "Product category is required."],
   },
   image: {
-    type: String,
-    required: [true, "Product image is required."],
-    default:
-      "https://www.sisega.com.mx/wp-content/uploads/2016/08/ef3-placeholder-image.jpg",
+    imageUrl: {
+      type: String,
+      required: [true, "Image path is required."],
+      default:
+        "https://www.sisega.com.mx/wp-content/uploads/2016/08/ef3-placeholder-image.jpg",
+    },
+    public_id: {
+      type: String,
+      default: null,
+    },
   },
   inStock: {
     type: Number,
