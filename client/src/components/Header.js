@@ -38,9 +38,15 @@ const Header = () => {
                     </Badge>
                   )}
                 </Nav.Link>
-                <Nav.Link as={Link} to={"/profile"}>
-                  Profile
-                </Nav.Link>
+                {user.role === "admin" ? (
+                  <Nav.Link as={Link} to="/admin">
+                    Admin
+                  </Nav.Link>
+                ) : (
+                  <Nav.Link as={Link} to={"/profile"}>
+                    Profile
+                  </Nav.Link>
+                )}
                 <Nav.Link as={Link} to={"/"} onClick={handleLogout}>
                   Logout
                 </Nav.Link>
