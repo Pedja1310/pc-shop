@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Col, Container, Form, Row, Button, Figure } from "react-bootstrap";
-import { createNewProduct } from "../api/products";
+import { createNewProduct, handleImageUpload } from "../api/products";
 
 const CreateProductPage = () => {
-  // const noImagePlaceholder
   const [previewSource, setPreviewSource] = useState(
     "https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
   );
@@ -13,7 +12,10 @@ const CreateProductPage = () => {
     brand: "",
     category: "",
     type: "",
-    image: "",
+    image: {
+      public_id: "1234",
+      imageUrl: "",
+    },
     price: "",
     description: "",
     inStock: true,
@@ -23,19 +25,28 @@ const CreateProductPage = () => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    previewFile(file);
-  };
+  const handleImage = async (e) => {
+    const img = e.target.files[0];
 
-  const previewFile = (file) => {
-    const reader = new FileReader();
+    const formData = new FormData();
 
-    reader.readAsDataURL(file);
+    formData.append("image", img);
 
-    reader.onload = () => {
-      setPreviewSource(reader.result);
-    };
+    formData.append("previousImage", product.image.public_id);
+
+    try {
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await handleImageUpload(formData, config);
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleFormSubmit = (e) => {
@@ -130,11 +141,7 @@ const CreateProductPage = () => {
         <Row className="mx-auto">
           <Form.Group as={Col} controlId="formFile" md={6} className="mt-3">
             <Form.Label>Product image</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={handleFileInputChange}
-              name="image"
-            />
+            <Form.Control type="file" onChange={handleImage} name="image" />
           </Form.Group>
           <Col className="d-flex flex-column mt-3" md={6}>
             <Figure className="align-self-center">

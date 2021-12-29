@@ -1,3 +1,4 @@
+const fs = require("fs");
 const Product = require("../models/Product");
 const catchAsync = require("../utils/catchAsync");
 const CustomError = require("../utils/CustomError");
@@ -20,19 +21,26 @@ exports.getSingleProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.createProduct = catchAsync(async (req, res, next) => {
-  const { image } = req.body;
-
-  const imageUploadResponse = await cloudinary.uploader.upload(image, {
-    upload_preset: "pc-shop",
-  });
-
   console.log(imageUploadResponse);
   // const product = await Product.create(req.body);
   res.status(201).json({ status: "success", message: "it works" });
 });
 
-exports.uploadProductImage = catchAsync(async (req, res, next) => {
-  res.send("upload image");
+exports.handleProductImage = catchAsync(async (req, res, next) => {
+  const { image } = req.files;
+
+  // console.log(req.body, req.files);
+
+  const imageUploadResponse = await cloudinary.uploader.upload(
+    image.tempFilePath,
+    {
+      upload_preset: "pc-shop",
+    }
+  );
+
+  fs.unlinkSync(image.tempFilePath);
+
+  res.status(201).json({ status: "success", imageUploadResponse });
 });
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
