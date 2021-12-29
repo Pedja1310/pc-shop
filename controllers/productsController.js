@@ -21,26 +21,9 @@ exports.getSingleProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.createProduct = catchAsync(async (req, res, next) => {
-  console.log(imageUploadResponse);
-  // const product = await Product.create(req.body);
-  res.status(201).json({ status: "success", message: "it works" });
-});
+  const product = await Product.create(req.body);
 
-exports.handleProductImage = catchAsync(async (req, res, next) => {
-  const { image } = req.files;
-
-  // console.log(req.body, req.files);
-
-  const imageUploadResponse = await cloudinary.uploader.upload(
-    image.tempFilePath,
-    {
-      upload_preset: "pc-shop",
-    }
-  );
-
-  fs.unlinkSync(image.tempFilePath);
-
-  res.status(201).json({ status: "success", imageUploadResponse });
+  res.status(201).json({ status: "success", product });
 });
 
 exports.updateProduct = catchAsync(async (req, res, next) => {
@@ -68,4 +51,23 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
   res
     .status(200)
     .json({ status: "success", msg: "Product delete successfull." });
+});
+
+exports.handleProductImage = catchAsync(async (req, res, next) => {
+  const { image } = req.files;
+
+  if (req.body.previousImage) {
+    await cloudinary.uploader.destroy(req.body.previousImage);
+  }
+
+  const { public_id, secure_url } = await cloudinary.uploader.upload(
+    image.tempFilePath,
+    {
+      upload_preset: "pc-shop",
+    }
+  );
+
+  fs.unlinkSync(image.tempFilePath);
+
+  res.status(201).json({ status: "success", image: { public_id, secure_url } });
 });

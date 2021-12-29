@@ -34,7 +34,7 @@ const ProductSchema = new mongoose.Schema({
     required: [true, "Product category is required."],
   },
   image: {
-    imageUrl: {
+    secure_url: {
       type: String,
       required: [true, "Image path is required."],
       default:

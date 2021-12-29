@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Image, Row, Button, Spinner } from "react-bootstrap";
+import { Image as CloudinaryImage, Transformation } from "cloudinary-react";
 import { addToCartAction } from "../store/actions/cartActions";
 import { useEffect } from "react";
 import { getSingleProductAction } from "../store/actions/productsActions";
@@ -31,10 +32,13 @@ const ProductDetails = () => {
         <>
           <Row>
             <Col lg="4">
-              <Image
-                src={product.image.imageUrl}
+              <CloudinaryImage
                 style={{ maxWidth: "100%" }}
-              />
+                publicId={product.image.public_id}
+                cloud_name="pedja1310"
+              >
+                <Transformation width="250" height="250" />
+              </CloudinaryImage>
             </Col>
             <Col lg="8" className="px-lg-5 d-flex flex-column">
               <h4>{product.title}</h4>

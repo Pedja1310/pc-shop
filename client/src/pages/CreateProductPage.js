@@ -1,20 +1,30 @@
 import { useState } from "react";
-import { Col, Container, Form, Row, Button, Figure } from "react-bootstrap";
+import { Image as CloudinaryImage, Transformation } from "cloudinary-react";
+
+import {
+  Col,
+  Container,
+  Form,
+  Row,
+  Button,
+  Figure,
+  Spinner,
+} from "react-bootstrap";
 import { createNewProduct, handleImageUpload } from "../api/products";
 
 const CreateProductPage = () => {
   const [previewSource, setPreviewSource] = useState(
     "https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
   );
+  const [imageLoading, setImageLoading] = useState(false);
 
   const [product, setProduct] = useState({
     title: "",
     brand: "",
     category: "",
-    type: "",
     image: {
-      public_id: "1234",
-      imageUrl: "",
+      public_id: "",
+      secure_url: "",
     },
     price: "",
     description: "",
@@ -26,41 +36,35 @@ const CreateProductPage = () => {
   };
 
   const handleImage = async (e) => {
-    const img = e.target.files[0];
+    if (e.target.files.length) {
+      const img = e.target.files[0];
 
-    const formData = new FormData();
+      const formData = new FormData();
+      formData.append("image", img);
+      formData.append("previousImage", product.image.public_id);
 
-    formData.append("image", img);
+      try {
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
 
-    formData.append("previousImage", product.image.public_id);
+        setImageLoading(true);
+        const { data } = await handleImageUpload(formData, config);
 
-    try {
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-
-      const { data } = await handleImageUpload(formData, config);
-
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+        setProduct({ ...product, image: data.image });
+        setImageLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const productWithImage = { ...product, image: previewSource };
 
-    createNewProduct(productWithImage);
-  };
-
-  const handleRemoveImage = () => {
-    setPreviewSource(
-      "https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
-    );
-    setProduct({ ...product, image: "" });
+    createNewProduct(product);
   };
 
   return (
@@ -98,7 +102,7 @@ const CreateProductPage = () => {
             />
           </Form.Group>
           <Form.Group as={Col} controlId="inStock" md={6} className="mt-3">
-            <Form.Label>Product price</Form.Label>
+            <Form.Label>Amount In Stock</Form.Label>
             <Form.Control
               name="inStock"
               type="number"
@@ -143,23 +147,28 @@ const CreateProductPage = () => {
             <Form.Label>Product image</Form.Label>
             <Form.Control type="file" onChange={handleImage} name="image" />
           </Form.Group>
-          <Col className="d-flex flex-column mt-3" md={6}>
-            <Figure className="align-self-center">
-              <Figure.Image
-                src={previewSource}
-                width={300}
-                height={500}
-                fluid
+          <Col
+            className="d-flex flex-column mt-3 justify-content-center"
+            md={6}
+          >
+            {imageLoading ? (
+              <Spinner
+                animation="grow"
+                variant="dark"
+                size="lg"
+                className="align-self-center"
               />
-            </Figure>
-            <Button
-              type="button"
-              variant="danger"
-              className="mt-2"
-              onClick={handleRemoveImage}
-            >
-              Remove Image
-            </Button>
+            ) : (
+              <Figure className="align-self-center">
+                <CloudinaryImage
+                  src={product.image.secure_url}
+                  width="300"
+                  crop="scale"
+                  responsive
+                  responsiveUseBreakpoints="true"
+                ></CloudinaryImage>
+              </Figure>
+            )}
           </Col>
         </Row>
         <Row>
