@@ -1,5 +1,13 @@
-import { GET_ALL_PRODUCTS, GET_SINGLE_PRODUCT } from "../actionTypes";
-import { getAllProducts, getSingleProduct } from "../../api/products";
+import {
+  GET_ALL_PRODUCTS,
+  GET_SINGLE_PRODUCT,
+  REMOVE_SINGLE_PRODUCT,
+} from "../actionTypes";
+import {
+  getAllProducts,
+  getSingleProduct,
+  createNewProduct,
+} from "../../api/products";
 
 export const getAllProductsAction = () => async (dispatch) => {
   try {
@@ -19,4 +27,19 @@ export const getSingleProductAction = (id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const createNewProductAction =
+  (product, history) => async (dispatch) => {
+    try {
+      const { data } = await createNewProduct(product);
+
+      history.push(`/products/${data.product._id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const removeSingleProductAction = () => async (dispatch) => {
+  dispatch({ type: REMOVE_SINGLE_PRODUCT });
 };

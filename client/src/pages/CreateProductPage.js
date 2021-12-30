@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Image as CloudinaryImage, Transformation } from "cloudinary-react";
+import { useHistory } from "react-router-dom";
+import { Image as CloudinaryImage } from "cloudinary-react";
+import { useDispatch } from "react-redux";
 
 import {
   Col,
@@ -10,10 +12,14 @@ import {
   Figure,
   Spinner,
 } from "react-bootstrap";
-import { createNewProduct, handleImageUpload } from "../api/products";
+import { handleImageUpload } from "../api/products";
+import { createNewProductAction } from "../store/actions/productsActions";
 
 const CreateProductPage = () => {
-  const [previewSource, setPreviewSource] = useState(
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [defaultImage, setDefaultImage] = useState(
     "https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
   );
   const [imageLoading, setImageLoading] = useState(false);
@@ -63,8 +69,7 @@ const CreateProductPage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    createNewProduct(product);
+    dispatch(createNewProductAction(product, history));
   };
 
   return (
@@ -160,13 +165,17 @@ const CreateProductPage = () => {
               />
             ) : (
               <Figure className="align-self-center">
-                <CloudinaryImage
-                  src={product.image.secure_url}
-                  width="300"
-                  crop="scale"
-                  responsive
-                  responsiveUseBreakpoints="true"
-                ></CloudinaryImage>
+                {product.image.secure_url ? (
+                  <CloudinaryImage
+                    src={product.image.secure_url}
+                    width="300"
+                    crop="scale"
+                    responsive
+                    responsiveUseBreakpoints="true"
+                  ></CloudinaryImage>
+                ) : (
+                  <Figure.Image src={defaultImage} width="300" />
+                )}
               </Figure>
             )}
           </Col>
