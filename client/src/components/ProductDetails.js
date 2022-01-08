@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Col, Container, Image, Row, Button, Spinner } from "react-bootstrap";
+import { Col, Container, Row, Button, Spinner } from "react-bootstrap";
 import { Image as CloudinaryImage, Transformation } from "cloudinary-react";
 import { addToCartAction } from "../store/actions/cartActions";
 import { useEffect } from "react";
@@ -12,11 +12,13 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
 
+  const { loading, product, error } = useSelector(
+    (state) => state.products.singleProduct
+  );
+
   useEffect(() => {
     dispatch(getSingleProductAction(id));
   }, []);
-
-  const product = useSelector((state) => state.products.singleProduct);
 
   const handleAddToCart = () => {
     dispatch(addToCartAction(product));
@@ -24,7 +26,7 @@ const ProductDetails = () => {
 
   return (
     <Container fluid className="px-0">
-      {Object.keys(product).length === 0 ? (
+      {loading ? (
         <Row>
           <Spinner animation="grow" />
         </Row>
@@ -32,13 +34,17 @@ const ProductDetails = () => {
         <>
           <Row>
             <Col lg="4">
-              <CloudinaryImage
-                style={{ maxWidth: "100%" }}
-                publicId={product.image.public_id}
-                cloud_name="pedja1310"
-              >
-                <Transformation width="250" height="250" />
-              </CloudinaryImage>
+              {!product.image ? (
+                <Spinner animation="grow" />
+              ) : (
+                <CloudinaryImage
+                  style={{ maxWidth: "100%" }}
+                  publicId={product.image.public_id}
+                  cloud_name="pedja1310"
+                >
+                  <Transformation width="250" height="250" />
+                </CloudinaryImage>
+              )}
             </Col>
             <Col lg="8" className="px-lg-5 d-flex flex-column">
               <h4>{product.title}</h4>

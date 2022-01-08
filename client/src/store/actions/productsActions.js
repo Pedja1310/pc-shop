@@ -2,6 +2,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_SINGLE_PRODUCT,
   REMOVE_SINGLE_PRODUCT,
+  TOGGLE_SINGLE_PRODUCT_LOADING,
 } from "../actionTypes";
 import {
   getAllProducts,
@@ -21,9 +22,11 @@ export const getAllProductsAction = () => async (dispatch) => {
 
 export const getSingleProductAction = (id) => async (dispatch) => {
   try {
+    dispatch({ type: TOGGLE_SINGLE_PRODUCT_LOADING });
     const { data } = await getSingleProduct(id);
 
     dispatch({ type: GET_SINGLE_PRODUCT, payload: data.product });
+    dispatch({ type: TOGGLE_SINGLE_PRODUCT_LOADING });
   } catch (error) {
     console.log(error);
   }
