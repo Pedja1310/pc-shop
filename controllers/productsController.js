@@ -41,10 +41,13 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
 
 exports.deleteProduct = catchAsync(async (req, res, next) => {
   const { id } = req.params;
+  const { imageId } = req.body;
 
   const product = await Product.findOne({ _id: id });
 
   if (!product) return next(new CustomError("Product not found.", 404));
+
+  await cloudinary.uploader.destroy(imageId);
 
   product.remove();
 

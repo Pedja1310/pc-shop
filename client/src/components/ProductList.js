@@ -2,7 +2,7 @@ import { Row, Col } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 
-const ProductList = () => {
+const ProductsList = () => {
   const products = useSelector((state) => state.products.allProducts);
 
   return (
@@ -16,4 +16,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductsList;

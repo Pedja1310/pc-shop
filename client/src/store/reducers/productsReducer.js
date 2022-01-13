@@ -1,6 +1,7 @@
 import {
   GET_ALL_PRODUCTS,
   GET_SINGLE_PRODUCT,
+  REMOVE_PRODUCT,
   REMOVE_SINGLE_PRODUCT,
   TOGGLE_SINGLE_PRODUCT_LOADING,
 } from "../actionTypes";
@@ -38,6 +39,13 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         singleProduct: { ...state.singleProduct, product: {} },
+      };
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        allProducts: state.allProducts.filter(
+          (product) => product._id !== action.payload
+        ),
       };
     default:
       return state;

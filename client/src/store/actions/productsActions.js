@@ -3,11 +3,14 @@ import {
   GET_SINGLE_PRODUCT,
   REMOVE_SINGLE_PRODUCT,
   TOGGLE_SINGLE_PRODUCT_LOADING,
+  REMOVE_PRODUCT,
 } from "../actionTypes";
 import {
   getAllProducts,
   getSingleProduct,
   createNewProduct,
+  updateProduct,
+  deleteProduct,
 } from "../../api/products";
 
 export const getAllProductsAction = () => async (dispatch) => {
@@ -42,6 +45,27 @@ export const createNewProductAction =
       console.log(error);
     }
   };
+
+export const updateProductAction = (product, history) => async (dispatch) => {
+  try {
+    const { data } = await updateProduct(product, product._id);
+
+    history.push(`/products/${data.product._id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteProductAction = (id, imageId) => async (dispatch) => {
+  try {
+    // console.log(imageId);
+    await deleteProduct(id, imageId);
+
+    dispatch({ type: REMOVE_PRODUCT, payload: id });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const removeSingleProductAction = () => async (dispatch) => {
   dispatch({ type: REMOVE_SINGLE_PRODUCT });

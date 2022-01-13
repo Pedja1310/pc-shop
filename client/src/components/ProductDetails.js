@@ -18,7 +18,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(getSingleProductAction(id));
-  }, []);
+  }, [dispatch, id]);
 
   const handleAddToCart = () => {
     dispatch(addToCartAction(product));
