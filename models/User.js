@@ -56,6 +56,27 @@ const UserSchema = new mongoose.Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+  shippingDetails: {
+    country: {
+      type: String,
+      default: "",
+    },
+    city: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    postalCode: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    address: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+  },
 });
 
 UserSchema.pre("save", async function (next) {
