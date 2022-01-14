@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
       validator: validator.isEmail,
       message: "Valid email is required.",
     },
+    immutable: [true, "Email cannot be changed."],
   },
   username: {
     type: String,
