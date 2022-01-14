@@ -5,7 +5,7 @@ import { userAuthAction } from "../store/actions/authActions";
 import { useHistory } from "react-router";
 
 function Auth() {
-  const [authType, setAuthType] = useState("signup");
+  const [authType, setAuthType] = useState("login");
   const [formState, setFormState] = useState({
     username: "",
     email: "",

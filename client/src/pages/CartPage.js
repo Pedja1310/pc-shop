@@ -1,4 +1,4 @@
-import { Col, Container, ListGroup, Row, Button } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import BackToShoppingButton from "../components/BackToShoppingButton";
 import CartItem from "../components/CartItem";
