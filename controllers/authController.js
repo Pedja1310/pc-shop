@@ -29,6 +29,7 @@ exports.userRegister = catchAsync(async (req, res, next) => {
       orders: user.orders,
       wishlist: user.wishlist,
       shippingDetails: user.shippingDetails,
+      _id: user._id,
     },
   });
 });
@@ -56,6 +57,7 @@ exports.userLogin = catchAsync(async (req, res, next) => {
       orders: user.orders,
       wishlist: user.wishlist,
       shippingDetails: user.shippingDetails,
+      _id: user._id,
     },
   });
 });

@@ -13,7 +13,13 @@ const BackToShoppingButton = () => {
     dispatch(removeSingleProductAction());
   };
   return (
-    <Button variant="secondary" as={Link} to="/" onClick={clearSingleProduct}>
+    <Button
+      variant="secondary"
+      as={Link}
+      to="/"
+      onClick={clearSingleProduct}
+      className="px-0"
+    >
       <ArrowLeft /> Continiue shopping
     </Button>
   );

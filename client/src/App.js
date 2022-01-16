@@ -11,6 +11,7 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import ProductsPage from "./pages/ProductsPage";
 import CreateProductPage from "./pages/CreateProductPage";
+import SingleProductPage from "./pages/SingleProductPage";
 import EditProductPage from "./pages/EditProductPage";
 import AdminPage from "./pages/AdminPage";
 import UserProfilePage from "./pages/UserProfilePage";
@@ -30,7 +31,7 @@ function App() {
             <Route path="/checkout" component={CheckoutPage} />
             <Route path="/create-product" component={CreateProductPage} />
             <Route path="/edit-product/:id" component={EditProductPage} />
-            <Route path="/products/:id" component={ProductsPage} />
+            <Route path="/products/:id" component={SingleProductPage} />
             <Route path="/admin" component={AdminPage} />
             <Route exact path="/" component={ProductsPage} />
           </Switch>

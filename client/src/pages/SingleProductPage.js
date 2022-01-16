@@ -8,10 +8,10 @@ const ProductPage = () => {
     <Container fluid className="p-0">
       <BackToShoppingButton />
       <Row className="mt-5">
-        <Col lg={9}>
+        <Col lg={8}>
           <ProductDetails />
         </Col>
-        <Col lg={3}>
+        <Col lg={4}>
           <UserWishlist />
         </Col>
       </Row>
