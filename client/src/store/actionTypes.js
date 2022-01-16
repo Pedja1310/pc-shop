@@ -1,6 +1,8 @@
-// AUTH TYPES
+// USER TYPES
 export const USER_AUTH = "USER_AUTH";
 export const USER_LOGOUT = "USER_LOGOUT";
+export const USER_UPDATE = "USER_UPDATE";
+export const GET_ALL_USERS = "GET_ALL_USERS";
 
 // CART TYPES
 export const CART_ADD = "CART_ADD";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
-import { userAuthAction } from "../store/actions/authActions";
+import { userAuthAction } from "../store/actions/usersActions";
 import { useHistory } from "react-router";
 
 function Auth() {

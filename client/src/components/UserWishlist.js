@@ -1,9 +1,13 @@
-import { Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-const UserWishlist = () => {
+const UserWishlist = ({ userWishlist }) => {
+  const { wishlist } = useSelector((state) => state.users.currentUser);
+
   return (
     <div>
-      <h5>User Wishlist</h5>
+      {wishlist.map((item) => (
+        <p key={item}>{item}</p>
+      ))}
     </div>
   );
 };

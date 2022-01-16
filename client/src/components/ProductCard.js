@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Image as CloudinaryImage, Transformation } from "cloudinary-react";
+import { Image as CloudinaryImage } from "cloudinary-react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCartAction } from "../store/actions/cartActions";
 
 const ProductCard = ({ product }) => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.users.currentUser);
 
   const dispatch = useDispatch();
 

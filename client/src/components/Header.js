@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, Badge } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogoutAction } from "../store/actions/authActions";
+import { userLogoutAction } from "../store/actions/usersActions";
 import numOfCartItems from "../utils/numOfCartItems";
 
 const Header = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.users.currentUser);
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Header = () => {
                     Admin
                   </Nav.Link>
                 ) : (
-                  <Nav.Link as={Link} to={"/profile"}>
+                  <Nav.Link as={Link} to={`/profile`}>
                     Profile
                   </Nav.Link>
                 )}

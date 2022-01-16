@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
 const CustomError = require("../utils/CustomError");
@@ -30,7 +31,36 @@ exports.showCurrentUser = catchAsync(async (req, res, next) => {
 });
 
 exports.updateUser = catchAsync(async (req, res, next) => {
-  res.send("update user");
+  const { id } = req.user;
+
+  const user = await User.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!user) return next(new CustomError("User not found.", 404));
+
+  res.status(200).json({ status: "success", user });
+});
+
+exports.updateUserWishlist = catchAsync(async (req, res, next) => {
+  const { productId } = req.body;
+
+  const user = await User.findById(req.params.id);
+
+  const index = user.wishlist.findIndex((item) => {
+    return String(item) === productId;
+  });
+
+  if (index == "-1") {
+    user.wishlist.push(productId);
+  } else {
+    user.wishlist = user.wishlist.filter((item) => String(item) !== productId);
+  }
+
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({ message: "success", user });
 });
 
 exports.updateUserPassword = catchAsync(async (req, res, next) => {

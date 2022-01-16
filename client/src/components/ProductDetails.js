@@ -5,9 +5,10 @@ import { addToCartAction } from "../store/actions/cartActions";
 import { useEffect } from "react";
 import { getSingleProductAction } from "../store/actions/productsActions";
 import { useParams } from "react-router";
+import { updateUserWishlistAction } from "../store/actions/usersActions";
 
 const ProductDetails = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.users.currentUser);
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ const ProductDetails = () => {
 
   const handleAddToCart = () => {
     dispatch(addToCartAction(product));
+  };
+
+  const handleUserWishlistUpdate = () => {
+    dispatch(updateUserWishlistAction({ productId: product._id }, user._id));
   };
 
   return (
@@ -52,13 +57,25 @@ const ProductDetails = () => {
               <h6>In Stock: {product.inStock}</h6>
               <Row className="mt-auto">
                 <Col>
-                  <Button
-                    variant="outline-danger"
-                    style={{ width: "100%" }}
-                    disabled={!user.email}
-                  >
-                    Add to Wishlist
-                  </Button>
+                  {user.wishlist.includes(product._id) ? (
+                    <Button
+                      variant="danger"
+                      style={{ width: "100%" }}
+                      disabled={!user.email}
+                      onClick={handleUserWishlistUpdate}
+                    >
+                      Remove from Wishlist
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outline-danger"
+                      style={{ width: "100%" }}
+                      disabled={!user.email}
+                      onClick={handleUserWishlistUpdate}
+                    >
+                      Add to Wishlist
+                    </Button>
+                  )}
                 </Col>
                 <Col>
                   <Button
