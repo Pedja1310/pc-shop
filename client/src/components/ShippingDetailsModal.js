@@ -84,7 +84,10 @@ const ShippingDetailsModal = ({
               placeholder="Please enter address"
             />
           </Form.Group>
-          <Button type="submit" className="w-100 mt-5">
+          <Button type="button" className="mt-5">
+            Close
+          </Button>
+          <Button type="submit" className="ms-3 mt-5">
             Submit
           </Button>
         </Form>

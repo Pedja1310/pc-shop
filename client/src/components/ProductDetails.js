@@ -57,7 +57,7 @@ const ProductDetails = () => {
               <h6>In Stock: {product.inStock}</h6>
               <Row className="mt-auto">
                 <Col>
-                  {user.wishlist.includes(product._id) ? (
+                  {user.wishlist?.includes(product._id) ? (
                     <Button
                       variant="danger"
                       style={{ width: "100%" }}

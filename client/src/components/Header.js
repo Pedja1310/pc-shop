@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, Badge } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogoutAction } from "../store/actions/usersActions";
-import numOfCartItems from "../utils/numOfCartItems";
 
 const Header = () => {
   const user = useSelector((state) => state.users.currentUser);
@@ -35,7 +34,7 @@ const Header = () => {
                   Cart{" "}
                   {cart.length > 0 && (
                     <Badge bg="dark" text="light">
-                      {numOfCartItems(cart)}
+                      {cart.length}
                     </Badge>
                   )}
                 </Nav.Link>

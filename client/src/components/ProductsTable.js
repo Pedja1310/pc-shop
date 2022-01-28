@@ -7,7 +7,7 @@ import {
   deleteProductAction,
   getAllProductsAction,
 } from "../store/actions/productsActions";
-import * as Icon from "react-bootstrap-icons";
+import { FiTrash, FiEdit2 } from "react-icons/fi";
 
 const ProductsTable = () => {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ const ProductsTable = () => {
                     as={Link}
                     to={`/edit-product/${product._id}`}
                   >
-                    <Icon.Pen />
+                    <FiEdit2 />
                   </Button>
                   <Button
                     size="sm"
@@ -72,7 +72,7 @@ const ProductsTable = () => {
                       handleDeleteProduct(product._id, product.image.public_id)
                     }
                   >
-                    <Icon.TrashFill className="" />
+                    <FiTrash />
                   </Button>
                 </td>
               </tr>

@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 
 import { removeSingleProductAction } from "../store/actions/productsActions";
 
+import { BiArrowBack } from "react-icons/bi";
 import { Button } from "react-bootstrap";
-import { ArrowLeft } from "react-bootstrap-icons";
 
 const BackToShoppingButton = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,8 @@ const BackToShoppingButton = () => {
       onClick={clearSingleProduct}
       className="px-0"
     >
-      <ArrowLeft /> Continiue shopping
+      <BiArrowBack className="me-2" />
+      Continiue shopping
     </Button>
   );
 };
