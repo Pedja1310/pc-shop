@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 
 const UserWishlist = ({ userWishlist }) => {
-  const { wishlist } = useSelector((state) => state.users.currentUser);
+  const user = useSelector((state) => state.users.currentUser);
 
   return (
     <div>
-      {wishlist.map((item) => (
+      {!user.hasOwnProperty("wishlist") && <p>Log In to see the wishlist</p>}
+      {user.wishlist?.map((item) => (
         <p key={item}>{item}</p>
       ))}
     </div>
