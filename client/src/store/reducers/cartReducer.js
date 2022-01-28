@@ -1,43 +1,53 @@
-import { CART_ADD } from "../actionTypes";
+import {
+  CART_ADD,
+  CART_REMOVE,
+  CART_DECREASE,
+  CART_INCREASE,
+} from "../actionTypes";
 
-const initialState = [
-  {
-    id: "615de303d5fb7c0c662986b8",
-    title: "NVIDIA GeForce RTX 3060 Ti Founders Edition 8GB",
-    image: "https://i.ebayimg.com/images/g/XtYAAOSwuxJf9GCu/s-l640.jpg",
-    price: 9999.99,
-    quantity: 3,
-  },
-  {
-    id: "615de303d5fb7c0c662986b7",
-    title: "Crucial Ballistix 3200MHz DDR4 16GB (8GBx2)",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTv38h5qxt0-m2uZiHzNag7aXfJfWEU3LGxQ&usqp=CAU",
-    price: 82.99,
-    quantity: 2,
-  },
-  {
-    id: "615de303d5fb7c0c662986b6",
-    title: "Intel Core i7-10700KF Desktop Processor",
-    image:
-      "https://cdn.pcexpress.co.za/media/catalog/product/i/n/intel_core_i7_-_10th_gen.jpg",
-    price: 308.94,
-    quantity: 1,
-  },
-];
+const initialState = [];
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CART_ADD:
-      const orderItem = action.payload;
-      const inCart = state.findIndex((item) => item.id === orderItem.id);
+    case CART_ADD: {
+      const newItem = action.payload;
+      const index = state.findIndex((item) => item._id === newItem._id);
 
-      if (inCart !== -1) {
-        const newOrders = [...state];
-        newOrders[inCart].quantity += 1;
-        return newOrders;
+      if (index !== -1) {
+        const cart = state;
+        cart[index].quantity += 1;
+        return cart;
       }
-      return [...state, orderItem];
+      return [...state, newItem];
+    }
+    case CART_REMOVE: {
+      const cart = state.filter((item) => item._id !== action.payload);
+      return cart;
+    }
+    case CART_INCREASE: {
+      const cart = state.map((item) => {
+        if (item._id === action.payload) {
+          return {
+            ...item,
+            quantity: item.quantity + 1,
+          };
+        }
+        return item;
+      });
+      return cart;
+    }
+    case CART_DECREASE: {
+      const cart = state.map((item) => {
+        if (item._id === action.payload) {
+          return {
+            ...item,
+            quantity: item.quantity - 1,
+          };
+        }
+        return item;
+      });
+      return cart;
+    }
     default:
       return state;
   }

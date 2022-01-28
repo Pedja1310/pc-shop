@@ -1,18 +1,30 @@
-import { CART_ADD } from "../actionTypes";
+import {
+  CART_ADD,
+  CART_DECREASE,
+  CART_INCREASE,
+  CART_REMOVE,
+} from "../actionTypes";
 
-export const addToCartAction = (item) => async (dispatch) => {
-  try {
-    // create item object
-    const orderItem = {
-      id: item._id,
-      title: item.title,
-      image: item.image,
-      price: item.price,
-      quantity: 1,
-    };
-    // dispatch iteam object
-    dispatch({ type: CART_ADD, payload: orderItem });
-  } catch (error) {
-    console.log(error);
-  }
+export const addToCartAction = (item) => (dispatch) => {
+  const newItem = {
+    _id: item._id,
+    title: item.title,
+    image: item.image,
+    price: item.price,
+    quantity: 1,
+  };
+  // dispatch iteam object
+  dispatch({ type: CART_ADD, payload: newItem });
+};
+
+export const removeFromCartAction = (id) => (dispatch) => {
+  dispatch({ type: CART_REMOVE, payload: id });
+};
+
+export const increaseQuantityAction = (id) => (dispatch) => {
+  dispatch({ type: CART_INCREASE, payload: id });
+};
+
+export const decreaseQuantityAction = (id) => (dispatch) => {
+  dispatch({ type: CART_DECREASE, payload: id });
 };

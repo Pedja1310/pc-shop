@@ -6,7 +6,9 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 
 // CART TYPES
 export const CART_ADD = "CART_ADD";
-export const CART_REMOVER = "CART_REMOVE";
+export const CART_REMOVE = "CART_REMOVE";
+export const CART_INCREASE = "CART_INCREASE";
+export const CART_DECREASE = "CART_DECREASE";
 
 // PRODUCT TYPES
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
