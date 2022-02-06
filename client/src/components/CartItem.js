@@ -6,6 +6,7 @@ import {
   increaseQuantityAction,
   decreaseQuantityAction,
 } from "../store/actions/cartActions";
+import { priceFormatter } from "../utils/priceFormatter";
 import { MdClear } from "react-icons/md";
 import { IoCaretBack, IoCaretForward } from "react-icons/io5";
 
@@ -57,7 +58,9 @@ const CartItem = ({ product }) => {
               sm="3"
               className="mt-3 d-flex flex-sm-row justify-content-between align-items-center w-100"
             >
-              <Card.Text as="span">Price: ${product.price}</Card.Text>
+              <Card.Text as="span">
+                Price: {priceFormatter(product.price)}
+              </Card.Text>
               <Card.Text as="span">
                 Quantity:{" "}
                 <Button className="p-0 me-2" disabled={product.quantity <= 1}>

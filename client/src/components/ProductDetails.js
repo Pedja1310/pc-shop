@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getSingleProductAction } from "../store/actions/productsActions";
 import { useParams } from "react-router";
 import { updateUserWishlistAction } from "../store/actions/usersActions";
+import { priceFormatter } from "../utils/priceFormatter";
 
 const ProductDetails = () => {
   const user = useSelector((state) => state.users.currentUser);
@@ -53,7 +54,7 @@ const ProductDetails = () => {
             </Col>
             <Col lg="8" className="px-lg-5 d-flex flex-column">
               <h4>{product.title}</h4>
-              <h5 className="mt-4">Price: ${product.price}</h5>
+              <h5 className="mt-4">Price: {priceFormatter(product.price)}</h5>
               <h6>In Stock: {product.inStock}</h6>
               <Row className="mt-auto">
                 <Col>

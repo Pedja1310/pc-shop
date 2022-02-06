@@ -1,3 +1,5 @@
+import { priceFormatter } from "./priceFormatter";
+
 export const numberOfCartItems = (cart) => {
   const numberOfItems = cart.reduce((prevItem, curItem) => {
     const total = prevItem + curItem.quantity;
@@ -13,5 +15,5 @@ export const calculateTotal = (cart) => {
     return sum;
   }, 0);
 
-  return total.toFixed(2);
+  return priceFormatter(total);
 };

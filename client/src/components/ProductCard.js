@@ -3,6 +3,7 @@ import { Image as CloudinaryImage } from "cloudinary-react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCartAction } from "../store/actions/cartActions";
+import { priceFormatter } from "../utils/priceFormatterer";
 
 const ProductCard = ({ product }) => {
   const user = useSelector((state) => state.users.currentUser);
@@ -27,7 +28,7 @@ const ProductCard = ({ product }) => {
       ></Card.Img>
       <Card.Body className="d-flex flex-column">
         <Link to={`/products/${product._id}`} className="stretched-link" />
-        <Card.Title as="p">${product.price}</Card.Title>
+        <Card.Title as="p">{priceFormatter(product.price)}</Card.Title>
         <Card.Text style={{ marginTop: "1rem" }}>{product.title}</Card.Text>
       </Card.Body>
       <Button

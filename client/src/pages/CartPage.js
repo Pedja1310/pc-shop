@@ -27,7 +27,7 @@ const Cart = () => {
             <ListGroup>
               <ListGroup.Item>Order details</ListGroup.Item>
               <ListGroup.Item>Items: {numberOfCartItems(cart)}</ListGroup.Item>
-              <ListGroup.Item>Price: ${calculateTotal(cart)}</ListGroup.Item>
+              <ListGroup.Item>Price: {calculateTotal(cart)}</ListGroup.Item>
               <ListGroup.Item>
                 <Button
                   className="w-100"
