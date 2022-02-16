@@ -1,6 +1,7 @@
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import UserInfo from "../components/UserInfo";
+import UserWishlist from "../components/UserWishlist";
 
 const UserProfilePage = () => {
   const user = useSelector((state) => state.users.currentUser);
@@ -13,7 +14,7 @@ const UserProfilePage = () => {
       <Row className="mt-5">
         <Col sm="4">
           <UserInfo user={user} />
-          {/* <UserWishlist /> */}
+          <UserWishlist />
         </Col>
         <Col sm="8">User Orders</Col>
       </Row>

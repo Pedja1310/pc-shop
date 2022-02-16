@@ -22,6 +22,8 @@ const ProductDetails = () => {
     dispatch(getSingleProductAction(id));
   }, [dispatch, id]);
 
+  const inWishlist = user.wishlist?.map(({ _id }) => _id).includes(product._id);
+
   const handleAddToCart = () => {
     dispatch(addToCartAction(product));
   };
@@ -39,7 +41,10 @@ const ProductDetails = () => {
       ) : (
         <>
           <Row>
-            <Col lg="4">
+            <Col
+              lg="4"
+              className="d-flex align-items-center justify-content-center mb-3"
+            >
               {!product.image ? (
                 <Spinner animation="grow" />
               ) : (
@@ -48,7 +53,7 @@ const ProductDetails = () => {
                   publicId={product.image.public_id}
                   cloud_name="pedja1310"
                 >
-                  <Transformation width="250" height="250" />
+                  <Transformation width="300" crop="scale" />
                 </CloudinaryImage>
               )}
             </Col>
@@ -56,9 +61,19 @@ const ProductDetails = () => {
               <h4>{product.title}</h4>
               <h5 className="mt-4">Price: {priceFormatter(product.price)}</h5>
               <h6>In Stock: {product.inStock}</h6>
-              <Row className="mt-auto">
+              <Row className="mt-3 d-flex flex-column">
                 <Col>
-                  {user.wishlist?.includes(product._id) ? (
+                  <Button
+                    variant="outline-dark"
+                    style={{ width: "100%" }}
+                    disabled={!user.email}
+                    onClick={handleAddToCart}
+                  >
+                    Add to Cart
+                  </Button>
+                </Col>
+                <Col className="mt-3">
+                  {inWishlist ? (
                     <Button
                       variant="danger"
                       style={{ width: "100%" }}
@@ -77,16 +92,6 @@ const ProductDetails = () => {
                       Add to Wishlist
                     </Button>
                   )}
-                </Col>
-                <Col>
-                  <Button
-                    variant="outline-dark"
-                    style={{ width: "100%" }}
-                    disabled={!user.email}
-                    onClick={handleAddToCart}
-                  >
-                    Add to Cart
-                  </Button>
                 </Col>
               </Row>
             </Col>
