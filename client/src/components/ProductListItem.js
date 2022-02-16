@@ -1,4 +1,4 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { Image as CloudinaryImage } from "cloudinary-react";
 import { useDispatch } from "react-redux";
 import {
@@ -10,7 +10,7 @@ import { priceFormatter } from "../utils/priceFormatter";
 import { MdClear } from "react-icons/md";
 import { IoCaretBack, IoCaretForward } from "react-icons/io5";
 
-const CartItem = ({ product }) => {
+const ProductListItem = ({ product, page }) => {
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = () => {
@@ -27,8 +27,8 @@ const CartItem = ({ product }) => {
 
   return (
     <Card
-      className="w-100 d-flex flex-row p-3 mb-3"
-      style={{ overflow: "hidden" }}
+      className="w-100 d-flex flex-row p-0 mb-5"
+      style={{ overflow: "hidden", border: "none" }}
     >
       <Card.Img
         as={CloudinaryImage}
@@ -37,46 +37,54 @@ const CartItem = ({ product }) => {
         cloud_name="pedja1310"
         className="align-self-center"
       />
-      <Card.Body className="ms-2">
-        <Container>
-          <Row className="d-flex flex-column flex-lg-row">
-            <Col
-              sm="9"
-              className="d-flex flex-row  justify-content-between align-items-center w-100"
-            >
-              <Card.Text as="h5" className="mb-0">
-                {product?.title}
-              </Card.Text>
-              <Card.Text>
+      <Card.Body className="ms-2 p-0 ps-3">
+        <Row className="d-flex flex-column flex-lg-row align-items-center justify-content-center">
+          <Col
+            sm="9"
+            className="d-flex flex-row justify-content-between align-items-center w-100"
+          >
+            <Card.Text as="h5" className="mb-0 align-self-center">
+              {product?.title}
+            </Card.Text>
+            {page === "cart" && (
+              <Card.Text className="ms-2">
                 <MdClear
                   style={{ width: "32px", height: "32px" }}
                   onClick={handleRemoveFromCart}
                 />
               </Card.Text>
-            </Col>
-            <Col
-              sm="3"
-              className="mt-3 d-flex flex-sm-row justify-content-between align-items-center w-100"
-            >
-              <Card.Text as="span">
-                Price: {priceFormatter(product.price)}
-              </Card.Text>
-              <Card.Text as="span">
-                Quantity:{" "}
+            )}
+          </Col>
+
+          <Col
+            sm="3"
+            className="mt-1 d-flex flex-column flex-lg-row justify-content-between align-items-start w-100"
+          >
+            <Card.Text as="span" className="mt-2">
+              Price: {priceFormatter(product.price)}
+            </Card.Text>
+            <Card.Text as="span" className="mt-2">
+              Quantity:{" "}
+              {page === "cart" && (
                 <Button className="p-0 me-2" disabled={product.quantity <= 1}>
                   <IoCaretBack onClick={handleQuantityDecrease} />
                 </Button>
-                {product?.quantity}
+              )}
+              {product?.quantity}
+              {page === "cart" && (
                 <Button className="p-0 ms-2">
                   <IoCaretForward onClick={handleQuantityIncrease} />
                 </Button>
-              </Card.Text>
-            </Col>
-          </Row>
-        </Container>
+              )}
+            </Card.Text>
+            <Card.Text className="mt-2">
+              Item Total: {priceFormatter(product.price * product.quantity)}
+            </Card.Text>
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   );
 };
 
-export default CartItem;
+export default ProductListItem;
