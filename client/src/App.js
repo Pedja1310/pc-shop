@@ -1,5 +1,4 @@
 import { Provider } from "react-redux";
-
 import { Switch, Route } from "react-router-dom";
 
 import { Container } from "react-bootstrap";
@@ -33,6 +32,7 @@ function App() {
             <Route path="/edit-product/:id" component={EditProductPage} />
             <Route path="/products/:id" component={SingleProductPage} />
             <Route path="/admin" component={AdminPage} />
+            <Route path="/checkout" component={CheckoutPage} />
             <Route exact path="/" component={ProductsPage} />
           </Switch>
         </Container>
