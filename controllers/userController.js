@@ -48,14 +48,18 @@ exports.updateUserWishlist = catchAsync(async (req, res, next) => {
 
   const user = await User.findById(req.params.id);
 
-  const index = user.wishlist.findIndex((item) => {
-    return String(item) === productId;
-  });
+  const index = user.wishlist
+    .map(({ _id }) => _id)
+    .findIndex((item) => {
+      return String(item) === productId;
+    });
 
   if (index == "-1") {
     user.wishlist.push(productId);
   } else {
-    user.wishlist = user.wishlist.filter((item) => String(item) !== productId);
+    user.wishlist = user.wishlist.filter(
+      (item) => String(item._id) !== productId
+    );
   }
 
   await user.save({ validateBeforeSave: false });

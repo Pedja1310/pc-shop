@@ -80,6 +80,7 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
+// Hash password
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
@@ -93,9 +94,27 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
+// Compare passwords on auth
 UserSchema.methods.comparePasswords = async function (loginPassword) {
   return await bcrypt.compare(loginPassword, this.password);
 };
+
+// Populate user wishlist middleware
+const populateUserWishlist = function (next) {
+  this.populate("wishlist", "_id title price image");
+  next();
+};
+
+// Populate user wishlist on query
+UserSchema.pre("find", populateUserWishlist).pre(
+  "findOne",
+  populateUserWishlist
+);
+
+// Populate user wishlist on document save
+UserSchema.post("save", function (doc, next) {
+  doc.populate("wishlist", "_id title price image").then(() => next());
+});
 
 const User = mongoose.model("User", UserSchema);
 
