@@ -23,7 +23,7 @@ const OrderSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  deliveryAddress: {
+  shippingAddress: {
     country: {
       type: String,
       required: true,
@@ -44,10 +44,6 @@ const OrderSchema = new mongoose.Schema({
       required: true,
       trim: true,
     },
-  },
-  isDelivered: {
-    type: Boolean,
-    default: false,
   },
 });
 
