@@ -3,7 +3,7 @@ import { Image as CloudinaryImage } from "cloudinary-react";
 import { Card, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCartAction } from "../store/actions/cartActions";
-import { priceFormatter } from "../utils/priceFormatterer";
+import { priceFormatter } from "../utils/priceFormatter";
 
 const ProductCard = ({ product }) => {
   const user = useSelector((state) => state.users.currentUser);
@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
       <Card.Img
         as={CloudinaryImage}
         variant="top"
-        style={{ width: "100%", height: "20vh", objectFit: "contain" }}
+        style={{ width: "100%", height: "30vh", objectFit: "contain" }}
         publicId={product.image.public_id}
         cloud_name="pedja1310"
       ></Card.Img>

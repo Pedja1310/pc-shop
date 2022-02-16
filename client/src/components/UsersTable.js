@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Container, Row, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getAllUsersAction } from "../store/actions/usersActions";

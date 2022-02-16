@@ -15,8 +15,8 @@ const UserInfo = ({ user }) => {
   };
 
   return (
-    <>
-      <h5>User Info</h5>
+    <div className="mb-5">
+      <h5 className="text-center">Shipping Details</h5>
       <ListGroup variant="flush" className="mt-4">
         <ListGroup.Item>Email: {user.email}</ListGroup.Item>
         <ListGroup.Item>
@@ -41,7 +41,7 @@ const UserInfo = ({ user }) => {
         userShippingDetails={user.shippingDetails}
         userId={user._id}
       />
-    </>
+    </div>
   );
 };
 
