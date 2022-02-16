@@ -3,29 +3,30 @@ import {
   CART_REMOVE,
   CART_DECREASE,
   CART_INCREASE,
+  CART_CLEAR,
 } from "../actionTypes";
 
-const initialState = [];
+const initialState = { cart: [] };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case CART_ADD: {
       const newItem = action.payload;
-      const index = state.findIndex((item) => item._id === newItem._id);
+      const index = state.cart.findIndex((item) => item._id === newItem._id);
 
       if (index !== -1) {
-        const cart = state;
+        const cart = state.cart;
         cart[index].quantity += 1;
-        return cart;
+        return { ...state, cart };
       }
-      return [...state, newItem];
+      return { ...state, cart: [...state.cart, newItem] };
     }
     case CART_REMOVE: {
-      const cart = state.filter((item) => item._id !== action.payload);
-      return cart;
+      const cart = state.cart.filter((item) => item._id !== action.payload);
+      return { ...state, cart };
     }
     case CART_INCREASE: {
-      const cart = state.map((item) => {
+      const cart = state.cart.map((item) => {
         if (item._id === action.payload) {
           return {
             ...item,
@@ -34,10 +35,10 @@ const cartReducer = (state = initialState, action) => {
         }
         return item;
       });
-      return cart;
+      return { ...state, cart };
     }
     case CART_DECREASE: {
-      const cart = state.map((item) => {
+      const cart = state.cart.map((item) => {
         if (item._id === action.payload) {
           return {
             ...item,
@@ -46,7 +47,10 @@ const cartReducer = (state = initialState, action) => {
         }
         return item;
       });
-      return cart;
+      return { ...state, cart };
+    }
+    case CART_CLEAR: {
+      return initialState;
     }
     default:
       return state;

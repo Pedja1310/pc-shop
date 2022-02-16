@@ -3,6 +3,7 @@ import {
   USER_LOGOUT,
   USER_UPDATE,
   GET_ALL_USERS,
+  CART_CLEAR,
 } from "../actionTypes";
 import {
   updateUser,
@@ -32,6 +33,7 @@ export const userAuthAction =
   };
 
 export const userLogoutAction = () => async (dispatch) => {
+  dispatch({ type: CART_CLEAR });
   dispatch({ type: USER_LOGOUT });
 };
 

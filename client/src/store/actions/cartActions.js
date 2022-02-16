@@ -3,6 +3,7 @@ import {
   CART_DECREASE,
   CART_INCREASE,
   CART_REMOVE,
+  CART_CLEAR,
 } from "../actionTypes";
 
 export const addToCartAction = (item) => (dispatch) => {
@@ -27,4 +28,8 @@ export const increaseQuantityAction = (id) => (dispatch) => {
 
 export const decreaseQuantityAction = (id) => (dispatch) => {
   dispatch({ type: CART_DECREASE, payload: id });
+};
+
+export const clearCartAction = () => (dispatch) => {
+  dispatch({ type: CART_CLEAR });
 };

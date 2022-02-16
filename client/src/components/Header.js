@@ -5,7 +5,7 @@ import { userLogoutAction } from "../store/actions/usersActions";
 
 const Header = () => {
   const user = useSelector((state) => state.users.currentUser);
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
 
