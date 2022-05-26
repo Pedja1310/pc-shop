@@ -1,6 +1,4 @@
 import { Button, Form } from "react-bootstrap";
-import { Formik } from "formik";
-import * as yup from "yup";
 
 const ShippingDetailsFrom = ({
   shippingDetails,
@@ -9,7 +7,7 @@ const ShippingDetailsFrom = ({
   page,
 }) => {
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit}>
       <Form.Group controledid="country" className="mt-3">
         <Form.Label>Country</Form.Label>
         <Form.Control
@@ -55,7 +53,7 @@ const ShippingDetailsFrom = ({
           <Button type="button" className="mt-5">
             Close
           </Button>
-          <Button type="submit" className="ms-3 mt-5">
+          <Button type="submit" className="ms-3 mt-5" onClick={handleSubmit}>
             Submit
           </Button>
         </>
