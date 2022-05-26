@@ -30,6 +30,9 @@ const Header = () => {
               </>
             ) : (
               <>
+                <Nav.Link as={Link} to="/">
+                  Store
+                </Nav.Link>
                 <Nav.Link as={Link} to="/cart">
                   Cart{" "}
                   {cart.length > 0 && (
