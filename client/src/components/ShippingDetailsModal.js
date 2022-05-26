@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { updateUserAction } from "../store/actions/usersActions";
 import ShippingDetailsFrom from "./ShippingDetailsForm";
 
