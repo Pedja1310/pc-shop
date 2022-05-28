@@ -3,6 +3,7 @@ require("dotenv").config({ path: `${__dirname}/../.env` });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Product = require("../models/Product");
 const Order = require("../models/Order");
+const User = require("../models/User");
 const catchAsync = require("../utils/catchAsync");
 const CustomError = require("../utils/CustomError");
 
@@ -34,4 +35,12 @@ exports.newPaymentIntent = catchAsync(async (req, res) => {
   res.send({
     clientSecret: paymentIntent.client_secret,
   });
+});
+
+exports.createNewOrder = catchAsync(async (req, res) => {
+  const { id } = req.user;
+
+  const newOrder = await Order.create({ user: id, ...req.body });
+
+  res.status(200).json(newOrder);
 });
