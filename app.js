@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const path = require("path");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const errorHandleMiddleware = require("./middlewares/errorHandleMiddleware");
@@ -26,9 +27,15 @@ app.use("/api/v1/products", productsRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/orders", ordersRouter);
 
-app.all("*", (req, res, next) => {
-  next(new CustomError(`Route ${req.originalUrl} not found.`, 404));
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
+
+// app.all("*", (req, res, next) => {
+//   next(new CustomError(`Route ${req.originalUrl} not found.`, 404));
+// });
 
 app.use(errorHandleMiddleware);
 

@@ -4,9 +4,10 @@
   "description": "Online computer shop built with MERN stack.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "SET NODE_ENV=production & node server.js",
     "dev": "SET NODE_ENV=development & nodemon server.js",
     "prod": "SET NODE_ENV=production & nodemon server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "data:add": "node seed-data/dataSeeder -i",
     "data:remove": "node seed-data/dataSeeder"
   },
