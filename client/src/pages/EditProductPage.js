@@ -28,9 +28,7 @@ const EditProduct = () => {
     inStock: 0,
   });
 
-  const { loading, product, error } = useSelector(
-    (state) => state.products.singleProduct
-  );
+  const { product } = useSelector((state) => state.products.singleProduct);
 
   // fetch product details after first render
   useEffect(() => {
