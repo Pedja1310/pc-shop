@@ -14,14 +14,11 @@ const Products = () => {
 
   return (
     <Container fluid className="p-0">
-      <Row>
-        <h1>Products</h1>
-      </Row>
       <Row className="mt-5">
-        <Col lg={2}>
+        <Col lg={3}>
           <ProductFilters />
         </Col>
-        <Col lg={10}>
+        <Col lg={9}>
           <ProductList />
         </Col>
       </Row>

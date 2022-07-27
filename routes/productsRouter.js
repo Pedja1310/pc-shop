@@ -6,6 +6,7 @@ const {
   updateProduct,
   deleteProduct,
   handleProductImage,
+  getProductsBySearch,
 } = require("../controllers/productsController");
 
 const {
@@ -19,6 +20,8 @@ productsRouter
   .route("/")
   .get(getAllProducts)
   .post(authentication, authorization("admin"), createProduct);
+
+productsRouter.route("/search").get(getProductsBySearch);
 
 productsRouter
   .route("/handleProductImage")

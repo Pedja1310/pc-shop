@@ -14,7 +14,7 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
 
-  const { loading, product, error } = useSelector(
+  const { loading, product } = useSelector(
     (state) => state.products.singleProduct
   );
 

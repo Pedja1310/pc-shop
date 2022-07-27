@@ -40,6 +40,7 @@ const UserInfo = ({ user }) => {
         closeModal={closeModal}
         userShippingDetails={user.shippingDetails}
         userId={user._id}
+        page="profile"
       />
     </div>
   );

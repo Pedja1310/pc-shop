@@ -1,50 +1,65 @@
 const mongoose = require("mongoose");
 
-const OrderSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  products: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
+const OrderSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    products: [
+      {
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
       },
-      quantity: {
+    ],
+    total: {
+      price: {
         type: Number,
         required: true,
       },
+      currency: {
+        type: String,
+        required: true,
+      },
     },
-  ],
-  total: {
-    type: String,
-    required: true,
-    trim: true,
+    shippingDetails: {
+      country: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      city: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      address: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      postalCode: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    },
   },
-  shippingAddress: {
-    country: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    city: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    address: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    zipCode: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-  },
+  { timestamps: true }
+);
+
+// Populate products on document save
+OrderSchema.pre("save", function (next) {
+  this.populate("products.product", "_id title price image")
+    .then(() => this.populate("user", "username email"))
+    .then(() => next());
 });
 
 const Order = mongoose.model("Order", OrderSchema);

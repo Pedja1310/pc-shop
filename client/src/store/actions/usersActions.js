@@ -4,6 +4,9 @@ import {
   USER_UPDATE,
   GET_ALL_USERS,
   CART_CLEAR,
+  USER_LOADING,
+  USER_ERROR,
+  CLEAR_USER_ERROR,
 } from "../actionTypes";
 import {
   updateUser,
@@ -14,9 +17,11 @@ import {
 } from "../../api/users";
 
 export const userAuthAction =
-  (credentials, authType, history) => async (dispatch) => {
+  (credentials, authType, navigate) => async (dispatch) => {
     try {
       let res;
+
+      dispatch({ type: USER_LOADING });
 
       if (authType === "signup") {
         res = await userRegister(credentials);
@@ -26,9 +31,15 @@ export const userAuthAction =
 
       dispatch({ type: USER_AUTH, payload: res.data });
 
-      history.push("/");
+      dispatch({ type: USER_LOADING });
+
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      dispatch({ type: USER_ERROR, payload: error.response.data.message });
+      dispatch({ type: USER_LOADING });
+      setTimeout(() => {
+        dispatch({ type: CLEAR_USER_ERROR });
+      }, 4500);
     }
   };
 

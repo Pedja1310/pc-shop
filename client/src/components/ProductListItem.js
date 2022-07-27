@@ -10,7 +10,7 @@ import { priceFormatter } from "../utils/priceFormatter";
 import { MdClear } from "react-icons/md";
 import { IoCaretBack, IoCaretForward } from "react-icons/io5";
 
-const ProductListItem = ({ product, page }) => {
+const ProductListItem = ({ product, page, quantity }) => {
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = () => {
@@ -28,11 +28,11 @@ const ProductListItem = ({ product, page }) => {
   return (
     <Card
       className="w-100 d-flex flex-row p-0 mb-5"
-      style={{ overflow: "hidden", border: "none" }}
+      style={{ overflow: "hidden", border: "none", maxWidth: "880px" }}
     >
       <Card.Img
         as={CloudinaryImage}
-        style={{ width: "15%", objectFit: "contain", height: "4rem" }}
+        style={{ width: "10%", objectFit: "contain", height: "5rem" }}
         publicId={product.image?.public_id}
         cloud_name="pedja1310"
         className="align-self-center"
@@ -63,23 +63,28 @@ const ProductListItem = ({ product, page }) => {
             <Card.Text as="span" className="mt-2">
               Price: {priceFormatter(product.price)}
             </Card.Text>
-            <Card.Text as="span" className="mt-2">
-              Quantity:{" "}
-              {page === "cart" && (
-                <Button className="p-0 me-2" disabled={product.quantity <= 1}>
-                  <IoCaretBack onClick={handleQuantityDecrease} />
-                </Button>
-              )}
-              {product?.quantity}
-              {page === "cart" && (
-                <Button className="p-0 ms-2">
-                  <IoCaretForward onClick={handleQuantityIncrease} />
-                </Button>
-              )}
-            </Card.Text>
-            <Card.Text className="mt-2">
-              Item Total: {priceFormatter(product.price * product.quantity)}
-            </Card.Text>
+            <>
+              <Card.Text as="span" className="mt-2">
+                Quantity:{" "}
+                {page === "cart" && (
+                  <Button className="p-0 me-2" disabled={product.quantity <= 1}>
+                    <IoCaretBack onClick={handleQuantityDecrease} />
+                  </Button>
+                )}
+                {product?.quantity || quantity}
+                {page === "cart" && (
+                  <Button className="p-0 ms-2">
+                    <IoCaretForward onClick={handleQuantityIncrease} />
+                  </Button>
+                )}
+              </Card.Text>
+              <Card.Text className="mt-2">
+                Item Total:{" "}
+                {priceFormatter(
+                  product.price * product.quantity || product.price * quantity
+                )}
+              </Card.Text>
+            </>
           </Col>
         </Row>
       </Card.Body>

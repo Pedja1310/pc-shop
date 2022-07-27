@@ -1,11 +1,11 @@
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import { Link, useMatch, Routes, Route } from "react-router-dom";
 import { Container, Row, Nav, Col } from "react-bootstrap";
 import ProductsTable from "../components/ProductsTable";
 import UsersTable from "../components/UsersTable";
 import OrdersTable from "../components/OrdersTable";
 
 const ProductsAdminPage = () => {
-  const { path, url } = useRouteMatch();
+  const { path, url } = useMatch();
 
   return (
     <Container>
@@ -34,7 +34,7 @@ const ProductsAdminPage = () => {
         </Col>
       </Row>
       <Row className="mt-5">
-        <Switch>
+        <Routes>
           <Route exact path={path}>
             <h5 className="mt-5">
               Welcome to Admin page, please select data to display.
@@ -43,7 +43,7 @@ const ProductsAdminPage = () => {
           <Route path={`${path}/products`} component={ProductsTable} />
           <Route path={`${path}/users`} component={UsersTable} />
           <Route path={`${path}/orders`} component={OrdersTable} />
-        </Switch>
+        </Routes>
       </Row>
     </Container>
   );

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { Container } from "react-bootstrap";
@@ -8,7 +8,7 @@ import { createNewProductAction } from "../store/actions/productsActions";
 import ProductForm from "../components/ProductForm";
 
 const CreateProductPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [imageLoading, setImageLoading] = useState(false);
@@ -58,7 +58,7 @@ const CreateProductPage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(createNewProductAction(product, history));
+    dispatch(createNewProductAction(product, navigate));
   };
 
   return (

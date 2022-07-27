@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateProductAction } from "../store/actions/productsActions";
 
@@ -11,7 +11,7 @@ import ProductForm from "../components/ProductForm";
 
 const EditProduct = () => {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [imageLoading, setImageLoading] = useState(false);
@@ -76,7 +76,7 @@ const EditProduct = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateProductAction(editProduct, history));
+    dispatch(updateProductAction(editProduct, navigate));
   };
 
   return (

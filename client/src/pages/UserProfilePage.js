@@ -1,6 +1,7 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import UserInfo from "../components/UserInfo";
+import UserOrders from "../components/UserOrders";
 import UserWishlist from "../components/UserWishlist";
 
 const UserProfilePage = () => {
@@ -16,7 +17,9 @@ const UserProfilePage = () => {
           <UserInfo user={user} />
           <UserWishlist />
         </Col>
-        <Col sm="8">User Orders</Col>
+        <Col sm="8">
+          <UserOrders />
+        </Col>
       </Row>
     </Container>
   );

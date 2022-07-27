@@ -60,7 +60,7 @@ const CheckoutPage = () => {
           )}
         </Col>
         <Col lg={3}>
-          <OrderDetails cart={cart} />
+          <OrderDetails cart={cart} shippingDetails={shippingDetails} />
         </Col>
       </Row>
     </Container>

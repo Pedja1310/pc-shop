@@ -36,13 +36,14 @@ exports.updateUser = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(id, req.body, {
     new: true,
     runValidators: true,
-  });
+  }).populate("wishlist", "_id title price image");
 
   if (!user) return next(new CustomError("User not found.", 404));
 
   res.status(200).json({ status: "success", user });
 });
 
+// TODO update adding and removing items with $push and $pull
 exports.updateUserWishlist = catchAsync(async (req, res, next) => {
   const { productId } = req.body;
 

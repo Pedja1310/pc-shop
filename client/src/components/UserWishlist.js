@@ -5,7 +5,7 @@ const UserWishlist = () => {
   const user = useSelector((state) => state.users.currentUser);
 
   return (
-    <div className="d-flex flex-column align-items-center">
+    <div className="d-flex flex-column align-items-center mb-5">
       <h5 className="mb-3">User Wishlist</h5>
       {!user.hasOwnProperty("wishlist") && <p>Login to see the wishlist</p>}
       {user.wishlist?.length === 0 && <p>Wishlist is currently empty.</p>}

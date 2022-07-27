@@ -3,13 +3,16 @@ import {
   USER_AUTH,
   USER_LOGOUT,
   USER_UPDATE,
+  USER_LOADING,
+  USER_ERROR,
+  CLEAR_USER_ERROR,
 } from "../actionTypes";
 
 const initialState = {
   users: [],
   currentUser: {},
   loading: false,
-  error: {},
+  error: "",
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -24,6 +27,12 @@ const usersReducer = (state = initialState, action) => {
       return { ...state, users: action.payload };
     case USER_UPDATE:
       return { ...state, currentUser: action.payload };
+    case USER_LOADING:
+      return { ...state, loading: !state.loading };
+    case USER_ERROR:
+      return { ...state, error: action.payload };
+    case CLEAR_USER_ERROR:
+      return { ...state, error: "" };
     default:
       return state;
   }

@@ -9,6 +9,7 @@ const ShippingDetailsModal = ({
   closeModal,
   userShippingDetails,
   userId,
+  page,
 }) => {
   const dispatch = useDispatch();
   const [shippingDetails, setShippingDetails] = useState(
@@ -48,6 +49,7 @@ const ShippingDetailsModal = ({
           shippingDetails={shippingDetails}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          page={page}
         />
       </Modal.Body>
     </Modal>

@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-exports.createToken = (id, role) => {
-  return jwt.sign({ id, role }, process.env.JWT_SECRET, {
+exports.createToken = (id, role, email) => {
+  console.log(email);
+  return jwt.sign({ id, role, email }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXP,
   });
 };

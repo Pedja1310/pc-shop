@@ -7,12 +7,13 @@ import {
   deleteProductAction,
   getAllProductsAction,
 } from "../store/actions/productsActions";
+import { priceFormatter } from "../utils/priceFormatter";
 import { FiTrash, FiEdit2 } from "react-icons/fi";
 
 const ProductsTable = () => {
   const dispatch = useDispatch();
 
-  const { allProducts } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(getAllProductsAction());
@@ -26,7 +27,7 @@ const ProductsTable = () => {
     <Container>
       <Row className="mt-5 align-items-center">
         <Col>
-          <h5 className="text-transform-uppercase">Products list</h5>
+          <h5 className="text-transform-uppercase">Product list</h5>
         </Col>
 
         <Col className="d-flex justify-content-end">
@@ -45,17 +46,19 @@ const ProductsTable = () => {
           <thead>
             <tr>
               <th>Title</th>
+              <th>Brand</th>
               <th>Category</th>
               <th>Price</th>
               <th>Admin Controls</th>
             </tr>
           </thead>
           <tbody>
-            {allProducts.map((product) => (
+            {products.map((product) => (
               <tr key={product._id}>
                 <td>{product.title}</td>
+                <td>{product.brand}</td>
                 <td>{product.category}</td>
-                <td>${product.price}</td>
+                <td>{priceFormatter(product.price)}</td>
                 <td className="d-flex justify-content-around align-items-center">
                   <Button
                     size="sm"

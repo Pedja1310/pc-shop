@@ -2,6 +2,13 @@ import API from "./index";
 
 export const getAllProducts = () => API.get("/products");
 
+export const searchProducts = (searchQuery) =>
+  API.get(
+    `/products/search?query=${searchQuery.query || "none"}&category=${
+      searchQuery.categories
+    }&brand=${searchQuery.brands}`
+  );
+
 export const getSingleProduct = (id) => API.get(`/products/${id}`);
 
 export const createNewProduct = (product) => API.post("/products", product);

@@ -12,9 +12,9 @@ const authentication = async (req, res, next) => {
   ) {
     try {
       token = req.headers.authorization.split("Bearer ")[1];
-      const { id, role } = verifyToken(token);
+      const { id, role, email } = verifyToken(token);
 
-      req.user = { id, role };
+      req.user = { id, role, email };
     } catch (error) {
       return next(
         new CustomError("Invalidd authentication. Please log in again.", 403)

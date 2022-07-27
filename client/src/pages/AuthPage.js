@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { UserLoginForm, UserRegisterForm } from "../components/AuthForms";
 
 function Auth() {

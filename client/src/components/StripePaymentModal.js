@@ -1,23 +1,32 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Button, Form, Modal } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { getNewPaymentIntent } from "../api/orders.js";
+import {
+  createNewOrderAction,
+  togglePaymentLoadingAction,
+} from "../store/actions/ordersActions.js";
 
-const StripePaymentModal = ({ showModal, closeModal }) => {
+const StripePaymentModal = ({ showModal, closeModal, shippingDetails }) => {
   const [message, setMessage] = useState("");
   const elements = useElements();
   const stripe = useStripe();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
+  const { paymentLoading } = useSelector((state) => state.orders);
 
+  // TODO refactor through redux
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!stripe || !elements) return;
 
-    const body = { paymentMethodType: "card", currency: "usd", cart };
+    dispatch(togglePaymentLoadingAction());
 
     const { error: backendError, data } = await getNewPaymentIntent({
       paymentMethodType: "card",
@@ -40,6 +49,23 @@ const StripePaymentModal = ({ showModal, closeModal }) => {
     if (stripeError) {
       setMessage(stripeError.message);
       return;
+    }
+
+    if (paymentIntent.status === "succeeded") {
+      const products = cart.cart.map((item) => {
+        return { product: item._id, quantity: item.quantity };
+      });
+
+      const order = {
+        products: products,
+        shippingDetails: shippingDetails,
+        total: {
+          price: paymentIntent.amount,
+          currency: paymentIntent.currency,
+        },
+      };
+
+      dispatch(createNewOrderAction(order, navigate));
     }
   };
 
@@ -65,8 +91,16 @@ const StripePaymentModal = ({ showModal, closeModal }) => {
             onChange={() => setMessage("")}
           />
           {message && <p className="text-danger text-center">{message}</p>}
-          <Button type="submit" className="w-100">
-            Pay
+          <Button type="submit" className="mt-3 w-100" onClick={handleSubmit}>
+            {paymentLoading ? (
+              <Spinner
+                animation="border"
+                role="status"
+                className="spinner-border-sm"
+              />
+            ) : (
+              "Finish Payment"
+            )}
           </Button>
         </Form>
       </Modal.Body>

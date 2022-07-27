@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { calculateTotal, numberOfCartItems } from "../utils/cartHelpers";
 import { useDispatch } from "react-redux";
 import { clearCartAction } from "../store/actions/cartActions";
 import StripePaymentModal from "./StripePaymentModal";
 
-const OrderDetails = ({ cart }) => {
+const OrderDetails = ({ cart, shippingDetails }) => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const history = useHistory();
-  const { url } = useRouteMatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const closeModal = () => {
     setShowModal(false);
@@ -22,7 +22,7 @@ const OrderDetails = ({ cart }) => {
 
   const handleCancelOrderAndClearCart = () => {
     dispatch(clearCartAction());
-    history.push("/");
+    navigate("/");
   };
 
   return (
@@ -32,7 +32,7 @@ const OrderDetails = ({ cart }) => {
       <ListGroup.Item>Quantity total: {numberOfCartItems(cart)}</ListGroup.Item>
       <ListGroup.Item>Price: {calculateTotal(cart)}</ListGroup.Item>
       <ListGroup.Item>
-        {url === "/cart" ? (
+        {location.pathname === "/cart" ? (
           <>
             <Button
               className={`w-100 ${!cart.length && "disabled"}`}
@@ -54,11 +54,18 @@ const OrderDetails = ({ cart }) => {
           </>
         ) : (
           <>
-            <StripePaymentModal showModal={showModal} closeModal={closeModal} />
+            <StripePaymentModal
+              showModal={showModal}
+              closeModal={closeModal}
+              shippingDetails={shippingDetails}
+            />
             <Button
               className="w-100"
               variant="dark"
-              disabled={!cart.length}
+              disabled={
+                !cart.length ||
+                Object.values(shippingDetails).some((element) => element === "")
+              }
               onClick={openModal}
             >
               Finish Order

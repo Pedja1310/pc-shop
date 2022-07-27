@@ -9,6 +9,40 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
     "title image price brand category"
   );
 
+  if (!products)
+    return next(
+      new CustomError("Unable to find products. Please try again later.", 404)
+    );
+
+  res.status(200).json({ status: "success", products });
+});
+
+exports.getProductsBySearch = catchAsync(async (req, res, next) => {
+  const { query, brand, category } = req.query;
+
+  let queryClauses = [];
+
+  if (query !== "none") {
+    const searchQuery = new RegExp(query, "i");
+    queryClauses.push({ title: searchQuery });
+  }
+
+  if (brand) {
+    const brandValues = brand.split(",").map((item) => new RegExp(item, "i"));
+    queryClauses.push({ brand: { $in: brandValues } });
+  }
+
+  if (category) {
+    const categoryValues = category
+      .split(",")
+      .map((item) => new RegExp(item, "i"));
+    queryClauses.push({ category: { $in: categoryValues } });
+  }
+
+  const products = await Product.find({
+    $and: queryClauses,
+  });
+
   res.status(200).json({ status: "success", products });
 });
 

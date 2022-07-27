@@ -42,5 +42,7 @@ exports.createNewOrder = catchAsync(async (req, res) => {
 
   const newOrder = await Order.create({ user: id, ...req.body });
 
-  res.status(200).json(newOrder);
+  const user = await User.findById(id);
+
+  res.status(200).json({ status: "success", data: { user, id: newOrder._id } });
 });

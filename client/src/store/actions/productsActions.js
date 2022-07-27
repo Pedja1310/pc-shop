@@ -4,6 +4,9 @@ import {
   REMOVE_SINGLE_PRODUCT,
   TOGGLE_SINGLE_PRODUCT_LOADING,
   REMOVE_PRODUCT,
+  TOGGLE_PRODUCTS_LOADING,
+  ADD_PRODUCT_ERROR,
+  CLEAR_PRODUCT_ERROR,
 } from "../actionTypes";
 import {
   getAllProducts,
@@ -11,15 +14,26 @@ import {
   createNewProduct,
   updateProduct,
   deleteProduct,
+  searchProducts,
 } from "../../api/products";
 
 export const getAllProductsAction = () => async (dispatch) => {
   try {
+    dispatch({ type: TOGGLE_PRODUCTS_LOADING });
+
     const { data } = await getAllProducts();
 
     dispatch({ type: GET_ALL_PRODUCTS, payload: data.products });
+    dispatch({ type: TOGGLE_PRODUCTS_LOADING });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: ADD_PRODUCT_ERROR,
+      payload: error.response.data.message,
+    });
+    dispatch({ type: TOGGLE_PRODUCTS_LOADING });
+    setTimeout(() => {
+      dispatch({ type: CLEAR_PRODUCT_ERROR });
+    }, 4500);
   }
 };
 
@@ -35,22 +49,36 @@ export const getSingleProductAction = (id) => async (dispatch) => {
   }
 };
 
+export const searchProductsAction = (searchQuery) => async (dispatch) => {
+  try {
+    dispatch({ type: TOGGLE_PRODUCTS_LOADING });
+
+    const { data } = await searchProducts(searchQuery);
+
+    dispatch({ type: GET_ALL_PRODUCTS, payload: data.products });
+
+    dispatch({ type: TOGGLE_PRODUCTS_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createNewProductAction =
-  (product, history) => async (dispatch) => {
+  (product, navigate) => async (dispatch) => {
     try {
       const { data } = await createNewProduct(product);
 
-      history.push(`/products/${data.product._id}`);
+      navigate(`/products/${data.product._id}`);
     } catch (error) {
       console.log(error);
     }
   };
 
-export const updateProductAction = (product, history) => async (dispatch) => {
+export const updateProductAction = (product, navigate) => async (dispatch) => {
   try {
     const { data } = await updateProduct(product, product._id);
 
-    history.push(`/products/${data.product._id}`);
+    navigate(`/products/${data.product._id}`);
   } catch (error) {
     console.error(error);
   }
@@ -58,7 +86,6 @@ export const updateProductAction = (product, history) => async (dispatch) => {
 
 export const deleteProductAction = (id, imageId) => async (dispatch) => {
   try {
-    // console.log(imageId);
     await deleteProduct(id, imageId);
 
     dispatch({ type: REMOVE_PRODUCT, payload: id });
