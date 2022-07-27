@@ -121,8 +121,6 @@ export const UserLoginForm = ({ authType }) => {
 
   const { loading, error } = useSelector((state) => state.users);
 
-  console.log(loading);
-
   return (
     <Formik
       validationSchema={userLoginSchema}

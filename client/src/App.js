@@ -18,6 +18,9 @@ import OrderPage from "./pages/OrderPage";
 
 import store from "./store";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import ProductsTable from "./components/ProductsTable";
+import UsersTable from "./components/UsersTable";
+import OrdersTable from "./components/OrdersTable";
 
 function App() {
   return (
@@ -33,7 +36,11 @@ function App() {
               <Route path="/orders/:id" element={<OrderPage />} />
               <Route path="/create-product" element={<CreateProductPage />} />
               <Route path="/edit-product/:id" element={<EditProductPage />} />
-              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/admin/*" element={<AdminPage />}>
+                {/* <Route path={"products"} element={<ProductsTable />} />
+                <Route path={"users"} element={<UsersTable />} />
+                <Route path={"orders"} element={<OrdersTable />} /> */}
+              </Route>
               <Route path="/checkout" element={<CheckoutPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
